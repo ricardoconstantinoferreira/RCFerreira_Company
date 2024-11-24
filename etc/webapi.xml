@@ -3,7 +3,21 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 
     <route url="/V1/company/save" method="POST">
-        <service class="RCFerreira\Company\Api\CompanySaveInterface" method="execute"/>
+        <service class="RCFerreira\Company\Api\CompanyApiInterface" method="saveCompany"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/company/get-all-company" method="GET">
+        <service class="RCFerreira\Company\Api\CompanyApiInterface" method="getAllCompany"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <route url="/V1/company/get-customers-by-company-id/:id" method="GET">
+        <service class="RCFerreira\Company\Api\CompanyApiInterface" method="getCustomersByCompanyId"/>
         <resources>
             <resource ref="anonymous" />
         </resources>
