@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="rcferreira_company" resource="default" engine="innodb" comment="Company Table">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Entity Id" />
+        <column xsi:type="varchar" name="cnpj" nullable="false" length="255" comment="CNPJ" />
+        <column xsi:type="varchar" name="razao_social" nullable="false" length="255" comment="Razão Social" />
+        <column xsi:type="varchar" name="nome_fantasia" nullable="false" length="255" comment="Nome Fantasia" />
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Email" />
+        <column xsi:type="boolean" name="mei" nullable="false" default="false" comment="Empresa é MEI" />
+        <column xsi:type="boolean" name="simples" nullable="false" default="false" comment="Optante pelo Simples Nacional" />
+
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At" />
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At" />
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id" />
+        </constraint>
+    </table>
+</schema>

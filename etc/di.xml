@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="RCFerreira\Company\Api\Data\CompanyInterface" type="RCFerreira\Company\Model\Company" />
+    <preference for="RCFerreira\Company\Api\Data\CompanySearchResultsInterface" type="RCFerreira\Company\Model\CompanySearchResults" />
+    <preference for="RCFerreira\Company\Api\CompanyRepositoryInterface" type="RCFerreira\Company\Model\CompanyRepository" />
+    <preference for="RCFerreira\Company\Api\CompanySaveInterface" type="RCFerreira\Company\Model\CompanySave" />
+
+    <type name="Magento\Customer\Controller\Adminhtml\Index\Edit">
+        <plugin name="edit_customer_session_company_customer"
+                type="RCFerreira\Company\Plugin\Controller\Adminhtml\Index\SaveCustomerIdCurrentPlugin" />
+    </type>
+</config>
