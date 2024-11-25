@@ -45,13 +45,11 @@ class Options extends AbstractSource
 
             if (!empty($dataCompany)) {
                 foreach ($dataCompany as $data) {
-                    $this->_options[] = [
+                    $optionDefault[] = [
                         'label' => $data['razao_social'],
                         'value' => $data['entity_id']
                     ];
                 }
-
-                return array_merge($optionDefault, $this->_options);
             }
         }
 

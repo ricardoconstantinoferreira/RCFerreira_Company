@@ -11,4 +11,22 @@
         <plugin name="edit_customer_session_company_customer"
                 type="RCFerreira\Company\Plugin\Controller\Adminhtml\Index\SaveCustomerEmailCurrentPlugin" />
     </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="company_index_listing_data_source" xsi:type="string">
+                    RCFerreira\Company\Model\ResourceModel\Company\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="RCFerreira\Company\Model\ResourceModel\Company\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">rcferreira_company</argument>
+            <argument name="resourceModel" xsi:type="string">RCFerreira\Company\Model\ResourceModel\Company</argument>
+        </arguments>
+    </virtualType>
+
 </config>
