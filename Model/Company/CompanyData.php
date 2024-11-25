@@ -8,17 +8,21 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use RCFerreira\Company\Api\CompanyRepositoryInterface;
 use RCFerreira\Company\Api\Data\CompanyInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use RCFerreira\Company\Model\ResourceModel\Company as ResourceCompany;
 
 class CompanyData
 {
     /**
      * @param CompanyInterface $company
      * @param CompanyRepositoryInterface $companyRepository
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param ResourceCompany $resourceCompany
      */
     public function __construct(
         private CompanyInterface $company,
         private CompanyRepositoryInterface $companyRepository,
-        private SearchCriteriaBuilder $searchCriteriaBuilder
+        private SearchCriteriaBuilder $searchCriteriaBuilder,
+        private ResourceCompany $resourceCompany
     ) {}
 
     /**
@@ -61,7 +65,6 @@ class CompanyData
      */
     public function getAllCompany(): array
     {
-        $searchCriteria = $this->searchCriteriaBuilder->create();
-        return $this->companyRepository->getList($searchCriteria);
+        return $this->resourceCompany->fetchAllCompany();
     }
 }

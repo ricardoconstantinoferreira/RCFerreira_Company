@@ -31,4 +31,14 @@ class Company extends AbstractDb
 
         return $select->fetchAll();
     }
+
+    /**
+     * @return array
+     */
+    public function fetchAllCompany(): array
+    {
+        $connection = $this->getConnection();
+        $select = $connection->select()->from("rcferreira_company");
+        return $select->query()->fetchAll();
+    }
 }

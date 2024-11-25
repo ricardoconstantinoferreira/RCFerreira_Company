@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace RCFerreira\Company\Model\Config\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
-use Magento\Customer\Model\SessionFactory;
-use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Model\SessionFactory;;
 use RCFerreira\Company\Model\Company\CompanyData;
 
 class Options extends AbstractSource
@@ -16,12 +15,10 @@ class Options extends AbstractSource
 
     /**
      * @param SessionFactory $sessionFactory
-     * @param CustomerRepositoryInterface $customerRepository
      * @param CompanyData $companyData
      */
     public function __construct(
         private SessionFactory $sessionFactory,
-        private CustomerRepositoryInterface $customerRepository,
         private CompanyData $companyData
     ) {
         $this->session = $this->sessionFactory->create();
@@ -29,8 +26,6 @@ class Options extends AbstractSource
 
     /**
      * @return array|array[]|null
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getAllOptions()
     {
@@ -38,24 +33,26 @@ class Options extends AbstractSource
             ['label' => 'Selecione', 'value' => '']
         ];
 
-        $customerId = $this->session->getCompanyCustomerId();
-        $customer = $this->customerRepository->getById($customerId);
+        $email = $this->session->getCompanyCustomerEmail();
 
-        $dataCompany = $this->companyData->getCompanyByEmail($customer->getEmail());
+        if (!empty($email)) {
 
-        if (empty($dataCompany)) {
-            $dataCompany = $this->companyData->getAllCompany();
-        }
+            $dataCompany = $this->companyData->getCompanyByEmail($email);
 
-        if (!empty($dataCompany)) {
-            foreach ($dataCompany as $data) {
-                $this->_options[] = [
-                    'label' => $data['razao_social'],
-                    'value' => $data['entity_id']
-                ];
+            if (empty($dataCompany)) {
+                $dataCompany = $this->companyData->getAllCompany();
             }
 
-            return array_merge($optionDefault, $this->_options);
+            if (!empty($dataCompany)) {
+                foreach ($dataCompany as $data) {
+                    $this->_options[] = [
+                        'label' => $data['razao_social'],
+                        'value' => $data['entity_id']
+                    ];
+                }
+
+                return array_merge($optionDefault, $this->_options);
+            }
         }
 
         return $optionDefault;
