@@ -39,6 +39,7 @@ class CompanyData
             $this->company->setEmail($data['email']);
             $this->company->setMei($data['mei']);
             $this->company->setSimples($data['simples']);
+            $this->company->setAddress($data['address']);
 
             $dataCompany = $this->companyRepository->save($this->company);
 

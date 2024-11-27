@@ -15,6 +15,8 @@ interface CompanyInterface
     public const MEI = 'mei';
     public const SIMPLES = 'simples';
 
+    public const ADDRESS = 'address';
+
     /**
      * @param $entity_id
      * @return mixed
@@ -91,4 +93,15 @@ interface CompanyInterface
      * @return string
      */
     public function getSimples(): bool;
+
+    /**
+     * @param string $address
+     * @return CompanyInterface
+     */
+    public function setAddress(string $address): CompanyInterface;
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string;
 }

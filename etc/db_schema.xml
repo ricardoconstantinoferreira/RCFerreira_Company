@@ -8,6 +8,7 @@
         <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Email" />
         <column xsi:type="boolean" name="mei" nullable="false" default="false" comment="Empresa é MEI" />
         <column xsi:type="boolean" name="simples" nullable="false" default="false" comment="Optante pelo Simples Nacional" />
+        <column xsi:type="varchar" name="address" nullable="true" default="" comment="Company Address" />
 
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Created At" />

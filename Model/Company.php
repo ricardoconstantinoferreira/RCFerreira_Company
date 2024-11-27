@@ -134,4 +134,21 @@ class Company extends AbstractModel implements CompanyInterface
     {
         return (bool) $this->getData(self::SIMPLES);
     }
+
+    /**
+     * @param string $address
+     * @return CompanyInterface
+     */
+    public function setAddress(string $address): CompanyInterface
+    {
+        return $this->setData(self::ADDRESS, $address);
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress(): string
+    {
+        return $this->getData(self::ADDRESS);
+    }
 }

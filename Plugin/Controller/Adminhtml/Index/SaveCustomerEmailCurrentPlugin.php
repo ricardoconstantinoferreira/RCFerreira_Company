@@ -29,7 +29,10 @@ class SaveCustomerEmailCurrentPlugin
     ) {
         $sessionCustomer = $this->sessionFactory->create();
         $customerId = (int) $subject->getRequest()->getParam('id');
-        $customer = $this->customerRepository->getById($customerId);
-        $sessionCustomer->setCompanyCustomerEmail($customer->getEmail());
+
+        if (!empty($customerId)) {
+            $customer = $this->customerRepository->getById($customerId);
+            $sessionCustomer->setCompanyCustomerEmail($customer->getEmail());
+        }
     }
 }
