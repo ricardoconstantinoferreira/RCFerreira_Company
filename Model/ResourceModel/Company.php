@@ -26,10 +26,8 @@ class Company extends AbstractDb
             ->join("customer_entity_varchar", "customer_entity_varchar.value = rcferreira_company.entity_id", [])
             ->join("customer_entity", "customer_entity.entity_id = customer_entity_varchar.entity_id",
                 ["customer_entity.entity_id as customer_id", "customer_entity.email", "customer_entity.firstname", "customer_entity.lastname"])
-            ->where("rcferreira_company.entity_id = {$companyId} and customer_entity.email <> rcferreira_company.email")
-            ->query();
-
-        return $select->fetchAll();
+            ->where("rcferreira_company.entity_id = {$companyId} and customer_entity.email <> rcferreira_company.email");
+        return $select->query()->fetchAll();
     }
 
     /**

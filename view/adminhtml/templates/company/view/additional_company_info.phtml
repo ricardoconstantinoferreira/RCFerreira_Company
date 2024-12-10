@@ -1,0 +1,50 @@
+<?php
+
+$companyId = (int) $block->getRequest()->getParam('entity_id');
+$result = $block->getInformationCustomerByCompany($companyId);
+?>
+
+<?php if (!empty($result)): ?>
+<table class="data-grid data-grid-draggable" data-role="grid">
+    <thead>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">ID</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Email</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Nome</span>
+        </th>
+        <th class="data-grid-th">
+            <span class="data-grid-cell-content">Action</span>
+        </th>
+    </thead>
+    <tbody>
+        <?php foreach ($result as $item): ?>
+            <?php
+                $url = $block->getUrl('customer/index/edit', ['id' => $item['customer_id']]);
+            ?>
+            <tr class="data-grid-bulk-edit-panel data-grid-editable-row">
+                <td>
+                    <div class="data-grid-cell-content">
+                        <?= $item['customer_id'] ?>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-grid-cell-content">
+                        <?= $item['email'] ?>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-grid-cell-content">
+                        <?= $item['firstname'] ?>
+                    </div>
+                </td>
+                <td><a class="action-menu-item"
+                       href="<?= $url ?>">Edit</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php endif; ?>

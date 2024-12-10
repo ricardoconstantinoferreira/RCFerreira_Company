@@ -46,8 +46,8 @@ class CompanyApi implements CompanyApiInterface
         if ($customerId) {
             $result = $this->companyData->save($data);
             $this->customerData->saveCustomAttributeCompany($customerId, $result);
-
         }
+
         return $this->json->serialize($result);
     }
 

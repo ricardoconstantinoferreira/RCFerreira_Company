@@ -13,6 +13,12 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
 
     const ADMIN_RESOURCE = 'RCFerreira_Company::save';
 
+    /**
+     * @param Action\Context $context
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Magento\Framework\Registry $registry
+     * @param CompanyRepositoryInterface $companyRepository
+     */
     public function __construct(
         Action\Context $context,
         private \Magento\Framework\View\Result\PageFactory $resultPageFactory,
@@ -22,6 +28,9 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Page
+     */
     protected function _initAction()
     {
         // load layout, set active menu and breadcrumbs
@@ -34,12 +43,14 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
         return $resultPage;
     }
 
+    /**
+     * @return \Magento\Backend\Model\View\Result\Page|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         $id = (int) $this->getRequest()->getParam('entity_id');
         $company = "";
 
-        // 2. Initial checking
         if ($id) {
             $company = $this->companyRepository->getById($id);
             if (!$company->getId()) {
@@ -50,7 +61,6 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
             }
         }
 
-        // 5. Build edit form
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->_initAction();
         $resultPage->addBreadcrumb(

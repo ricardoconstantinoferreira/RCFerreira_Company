@@ -40,7 +40,7 @@ class CustomerData
 
             $dataName = explode(" ", $data['razao_social']);
             $this->customer->setFirstname($dataName[0]);
-            $this->customer->setLastname($dataName[1]);
+            $this->customer->setLastname((isset($dataName[1])) ? $dataName[1] : "");
             $this->customer->setTaxvat($data['cnpj']);
             $this->customer->setEmail($data['email']);
 

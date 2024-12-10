@@ -24,16 +24,27 @@ class AddCompanyIdInTheCustomer implements DataPatchInterface, PatchRevertableIn
         private AttributeSetFactory $attributeSetFactory
     ) {}
 
+    /**
+     * @return array|string[]
+     */
     public static function getDependencies()
     {
         return [];
     }
 
+    /**
+     * @return array|string[]
+     */
     public function getAliases()
     {
         return [];
     }
 
+    /**
+     * @return void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Validator\ValidateException
+     */
     public function apply()
     {
         $this->moduleDataSetup->getConnection()->startSetup();
@@ -70,16 +81,13 @@ class AddCompanyIdInTheCustomer implements DataPatchInterface, PatchRevertableIn
         $attribute->save();
 
         $this->moduleDataSetup->getConnection()->endSetup();
-
     }
 
+    /**
+     * @return array
+     */
     public function revert()
     {
-        $this->moduleDataSetup->getConnection()->startSetup();
-
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
-        $eavSetup->removeAttribute(Customer::ENTITY, 'company');
-
-        $this->moduleDataSetup->getConnection()->endSetup();
+        return [];
     }
 }

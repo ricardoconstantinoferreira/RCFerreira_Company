@@ -6,6 +6,10 @@
     <body>
         <referenceContainer name="content">
             <uiComponent name="company_index_form"/>
+
+            <block class="RCFerreira\Company\Block\Adminhtml\Company\View\Info" name="information_customer_by_company"
+                   template="RCFerreira_Company::company/view/additional_company_info.phtml">
+            </block>
         </referenceContainer>
     </body>
 </page>

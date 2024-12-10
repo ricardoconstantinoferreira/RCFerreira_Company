@@ -37,8 +37,8 @@ class CompanyData
             $this->company->setRazaoSocial($data['razao_social']);
             $this->company->setNomeFantasia($data['nome_fantasia']);
             $this->company->setEmail($data['email']);
-            $this->company->setMei($data['mei']);
-            $this->company->setSimples($data['simples']);
+            $this->company->setMei((bool) $data['mei']);
+            $this->company->setSimples((bool) $data['simples']);
             $this->company->setAddress($data['address']);
 
             $dataCompany = $this->companyRepository->save($this->company);
